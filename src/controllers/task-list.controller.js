@@ -4,13 +4,6 @@ export const getAllTaskList = async(req, res)=>{
     //const {categoria} = req.query;
 
     const taskList = await models.getAllTaskList();
-
-    // if (categoria) {
-    //     const productsFiltered = products.filter((item)=>item.categories.includes(categoria));
-    //     res.json(productsFiltered);
-    //     return;
-    // }
-
     res.json(taskList);
 }
 
@@ -43,5 +36,11 @@ export const updateTaskList = async(req, res)=>{
         return res.status(422).json({msg:"Title, Date and Priority are required"})
     }
 
-    const updateTaskList = models.updateTaskList(id, {title, dueDate, priority, completed});
+    const updateTaskList = await models.updateTaskList(id, {title, dueDate, priority, completed});
+
+    if (!updateTaskList) {
+        return res.status(404).json({error:"Producto no encontrado"});
+    }
+
+    return res.status(200).json(updateTaskList);
 }

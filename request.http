@@ -14,14 +14,14 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:3000/update/3iV9lFTK7jMLQ3MNzUmU
-//PUT http://localhost:3000/update/9UrqJrDAlXRbeTpkRep8
+PUT http://localhost:3000/update/9UrqJrDAlXRbeTpkRep8
 Content-Type: application/json
 
 {
     "title": "Task 1",
     "priority": "High",
-    "dueDate": "22026-03-27"
+    "dueDate": "22026-03-27",
+    "completed": true
 }
 
 ###
