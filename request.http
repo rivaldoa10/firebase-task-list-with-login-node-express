@@ -1,0 +1,33 @@
+Get http://localhost:3000/
+
+###
+Get http://localhost:3000/getAll/
+
+###
+POST http://localhost:3000/create/
+Content-Type: application/json
+
+{
+    "title": "Task 2",
+    "priority": "Medium",
+    "dueDate": "22026-03-27"
+}
+
+###
+PUT http://localhost:3000/update/3iV9lFTK7jMLQ3MNzUmU
+//PUT http://localhost:3000/update/9UrqJrDAlXRbeTpkRep8
+Content-Type: application/json
+
+{
+    "title": "Task 1",
+    "priority": "High",
+    "dueDate": "22026-03-27"
+}
+
+###
+DELETE http://localhost:3000/delete/GRu0gEmQLKiCr54QaChG
+
+
+
+
+
