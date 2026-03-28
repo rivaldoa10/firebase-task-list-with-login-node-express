@@ -2,6 +2,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors"
 import router from "./src/routes/task-list.router.js";
+import routerAuth from "./src/routes/auth.router.js";
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use(router);
+app.use(routerAuth);
 
 
 app.get("/", (req, res)=>{

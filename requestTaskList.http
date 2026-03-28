@@ -1,0 +1,57 @@
+Get http://localhost:3000/
+
+###
+Get http://localhost:3000/getAll/
+
+###
+Get http://localhost:3000/getAllByStatus
+?status=false
+
+###
+POST http://localhost:3000/create/
+Content-Type: application/json
+
+{
+    "title": "Task 2",
+    "priority": "Medium",
+    "dueDate": "22026-03-27"
+}
+
+###
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZWYUhUbDVEOVdZMkNGZzdLU3hyIiwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlhdCI6MTc3NDcxNzQ3NCwiZXhwIjoxNzc0NzIxMDc0fQ.F0v1Nsvw6V7jRn8FX4WSi7dyKo7HpLuhT3V-rkHl2Yg
+POST http://localhost:3000/createToken/
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+    "title": "Task 2",
+    "priority": "Medium",
+    "dueDate": "22026-03-27"
+}
+
+###
+PUT http://localhost:3000/update/9UrqJrDAlXRbeTpkRep8
+Content-Type: application/json
+
+{
+    "title": "Task 1",
+    "priority": "High",
+    "dueDate": "22026-03-27",
+    "completed": true
+}
+
+###
+PATCH  http://localhost:3000/updatePatch/tGwXGPlJI3f7mLBjxQSz
+Content-Type: application/json
+
+{
+    "completed": false
+}
+
+###
+DELETE http://localhost:3000/delete/GRu0gEmQLKiCr54QaChG
+
+
+
+
+
