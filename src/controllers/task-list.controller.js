@@ -1,14 +1,15 @@
 import * as models from "../models/task-list.js";
 
 export const getAllTaskList = async(req, res)=>{
-    const taskList = await models.getAllTaskList();
+    const userId = req.params.userId;
+    const taskList = await models.getAllTaskList(userId);
     res.json(taskList);
 }
 
 export const createTaskList = async (req, res)=>{
-    const {title, dueDate, priority} = req.body;
+    const {title, dueDate, priority, completed, userId} = req.body;
 
-    const product = await models.createTaskList({title, dueDate, priority});
+    const product = await models.createTaskList({title, dueDate, priority, completed, userId});
 
     res.status(200).json(product);
 
@@ -27,13 +28,13 @@ export const deleteTaskList = async(req, res)=>{
 
 export const updateTaskList = async(req, res)=>{
     const {id} = req.params
-    const {title, dueDate, priority, completed} = req.body;
+    const {title, dueDate, priority, completed, userId} = req.body;
 
     if(!title || !dueDate || !priority){
         return res.status(422).json({msg:"Title, Date and Priority are required"})
     }
 
-    const updateTaskList = await models.updateTaskList(id, {title, dueDate, priority, completed});
+    const updateTaskList = await models.updateTaskList(id, {title, dueDate, priority, completed, userId});
 
     if (!updateTaskList) {
         return res.status(404).json({error:"Producto no encontrado"});
@@ -67,11 +68,11 @@ export const updatePatchTaskList = async(req, res)=>{
 }
 
 export const getTaskListByStatus = async(req, res)=>{
-    const {status} = req.query;
-    if (!status) {
+    const {status, userId} = req.query;
+    if (!status || !userId) {
         res.status(404).json({msg: "No se encontraron resultado"});
     }
     
-    const taskList = await models.getTaskListByStatus(status);
+    const taskList = await models.getTaskListByStatus(status, userId);
     return res.status(200).json(taskList);
 }

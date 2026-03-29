@@ -6,7 +6,7 @@ import { verifyToken } from "../middlewares/verify-token.js";
 
 const router = Router();
 
-router.get("/getAll", getAllTaskList)
+router.get("/getAll/:userId", getAllTaskList)
 
 router.get("/getAllByStatus", getTaskListByStatus)
 

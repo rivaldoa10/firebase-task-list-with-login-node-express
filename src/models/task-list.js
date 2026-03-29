@@ -4,10 +4,11 @@ import { collection, getDocs, addDoc, doc, getDoc,deleteDoc, setDoc, updateDoc, 
 
 const taskListCollection = collection(db, "task-list");
 
-export const getAllTaskList = async ()=>{
+export const getAllTaskList = async (userId)=>{
     try {
-        const taskList = await getDocs(taskListCollection);
-        return taskList.docs.map((doc)=>({id:doc.id, ...doc.data()}));
+        const q = query(taskListCollection, where("userId", "==", userId));
+        const snapshot = await getDocs(q);
+        return snapshot.docs.map(doc => ({id: doc.id,...doc.data()}));
     } catch (error) {
         console.error(error);
         
@@ -16,7 +17,6 @@ export const getAllTaskList = async ()=>{
 
 export const createTaskList = async(data)=>{
     try {
-        data.completed = false;
         const docRef = await addDoc(taskListCollection, data);    
         return {
             id:docRef,
@@ -77,14 +77,15 @@ export const updatePatchTaskList = async(id, taskList)=>{
     }
 }
 
-export const getTaskListByStatus = async(status)=>{
+export const getTaskListByStatus = async(status, userId)=>{
     try {
         let isCompleted = false;
         if (status == "true" || status == "True") {
             isCompleted = true;             
         }
 
-        const q = query(taskListCollection, where("completed", "==",  isCompleted));
+        const q = query(taskListCollection, where("completed", "==",  isCompleted),where("userId", "==", userId)
+);
         
         const snapshop = await getDocs(q);
         return snapshop.docs.map((doc)=>({
